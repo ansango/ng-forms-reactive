@@ -15,7 +15,9 @@ import { ProfileService } from 'src/app/shared/services/profile.service';
   styleUrls: ['./education-new-edit.component.css'],
 })
 export class EducationNewEditComponent implements OnInit {
+  isEducation: boolean = false;
   education?: Education;
+  educationId!: number;
   newEducation?: Education;
   newEducationForm!: FormGroup;
   types = Object.values(EducationType);
@@ -32,11 +34,25 @@ export class EducationNewEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.newEducationForm = this.formBuilder.group({
-      type: [],
-      level: [],
-      name: [],
-      school: [],
-      finishDate: [],
+      type: [null, [Validators.required]],
+      level: [null, [Validators.required]],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(55),
+        ],
+      ],
+      school: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(55),
+        ],
+      ],
+      finishDate: [''],
     });
     this.getEducation();
   }
@@ -47,8 +63,9 @@ export class EducationNewEditComponent implements OnInit {
     return (this.selectedType = 'university');
   }
 
-  getEducation(): void {
+  getEducation(): void | boolean {
     const id = +this.route.snapshot.paramMap.get('id')!;
+    if (id) this.isEducation = true;
     this.profileService.getEducationById(id).subscribe((education) => {
       this.education = education;
       this.newEducationForm.patchValue({
@@ -63,5 +80,19 @@ export class EducationNewEditComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
     const education = form.value;
+    if (this.isEducation) this.updateEducation(education);
+    this.createEducation(education);
+  }
+
+  createEducation(education: Education): void {
+    this.profileService
+      .postEducation(education)
+      .subscribe(() => this.router.navigate(['/profile']));
+  }
+
+  updateEducation(education: Education): void {
+    this.profileService
+      .updateEducation(education)
+      .subscribe(() => this.router.navigate(['/profile']));
   }
 }

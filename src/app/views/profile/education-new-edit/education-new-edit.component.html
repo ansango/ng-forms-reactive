@@ -1,12 +1,13 @@
-<div class="wrapper-activity">
+<div class="wrapper-education">
   <div class="form-group wrapper-form">
-    <h2>Activity</h2>
+    <h2 *ngIf="!isEducation">Create Education</h2>
+    <h2 *ngIf="isEducation">Update Education</h2>
     <form
-      class="activity-form"
+      class="education-form"
       (ngSubmit)="onSubmit(newEducationForm)"
       [formGroup]="newEducationForm"
     >
-      <div class="activity-group">
+      <div class="education-group">
         <div class="type">
           <label>type</label>
           <select
@@ -26,26 +27,105 @@
             "
           >
             <div *ngIf="newEducationForm.get('type')?.errors?.required">
-              name is required
-            </div>
-            <div *ngIf="newEducationForm.get('type')?.errors?.minlength">
-              name is too short
-            </div>
-            <div *ngIf="newEducationForm.get('type')?.errors?.maxlength">
-              name is too long
+              type is required
             </div>
           </span>
         </div>
         <div class="level">
           <label *ngIf="selectedType !== ''">level</label>
-          <select *ngIf="selectedType === 'training'">
+          <select
+            aria-placeholder="level"
+            name="level"
+            formControlName="level"
+            *ngIf="selectedType === 'training'"
+          >
             <option value="null" disabled>Select a type education</option>
             <option *ngFor="let level of training">{{ level }}</option>
           </select>
-          <select *ngIf="selectedType === 'university'">
+          <select
+            aria-placeholder="level"
+            name="level"
+            formControlName="level"
+            *ngIf="selectedType === 'university'"
+          >
             <option value="null" disabled>Select a type education</option>
             <option *ngFor="let level of university">{{ level }}</option>
           </select>
+          <span
+            *ngIf="
+              newEducationForm.get('level')?.errors &&
+              (newEducationForm.get('level')!.dirty ||
+                newEducationForm.get('level')!.touched)
+            "
+          >
+            <div *ngIf="newEducationForm.get('level')?.errors?.required">
+              level is required
+            </div>
+          </span>
+        </div>
+
+        <div *ngIf="selectedType !== ''">
+          <div class="name">
+            <label>name</label>
+            <input
+              type="text"
+              placeholder="Name"
+              name="name"
+              formControlName="name"
+            />
+            <span
+              *ngIf="
+                newEducationForm.get('name')?.errors &&
+                (newEducationForm.get('name')!.dirty ||
+                  newEducationForm.get('name')!.touched)
+              "
+            >
+              <div *ngIf="newEducationForm.get('name')?.errors?.required">
+                name is required
+              </div>
+              <div *ngIf="newEducationForm.get('name')?.errors?.minlength">
+                name is too short
+              </div>
+              <div *ngIf="newEducationForm.get('name')?.errors?.maxlength">
+                name is too long
+              </div>
+            </span>
+          </div>
+          <div class="school">
+            <label>school</label>
+            <input
+              type="text"
+              placeholder="School"
+              name="school"
+              formControlName="school"
+            />
+            <span
+              *ngIf="
+                newEducationForm.get('school')?.errors &&
+                (newEducationForm.get('school')!.dirty ||
+                  newEducationForm.get('school')!.touched)
+              "
+            >
+              <div *ngIf="newEducationForm.get('school')?.errors?.required">
+                school is required
+              </div>
+              <div *ngIf="newEducationForm.get('school')?.errors?.minlength">
+                school is too short
+              </div>
+              <div *ngIf="newEducationForm.get('school')?.errors?.maxlength">
+                school is too long
+              </div>
+            </span>
+          </div>
+          <div class="finish-date">
+            <label>finish date</label>
+            <input
+              type="date"
+              placeholder=""
+              name="finisDate"
+              formControlName="finishDate"
+            />
+          </div>
         </div>
       </div>
 

@@ -15,6 +15,9 @@ export class ProfileService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
+  profileId!: number;
+  educationId!: number;
+
   private readonly urlEducation = 'api/education';
   private readonly urlProfiles = 'api/profiles';
 
@@ -24,13 +27,8 @@ export class ProfileService {
     private router: Router
   ) {}
 
-  postProfile(profile: Profile): void {
-    this.http
-      .post<Profile>(this.urlProfiles, profile, this.httpOptions)
-      .subscribe();
-  }
-
   getProfile(id: number): Observable<Profile> {
+    this.profileId = id;
     const url = `${this.urlProfiles}/${id}`;
     return this.http.get<Profile>(url);
   }
@@ -41,9 +39,31 @@ export class ProfileService {
   }
 
   getEducationById(id: number): Observable<Education> {
+    this.educationId = id;
     if (id === 0) return of();
     const url = `${this.urlEducation}/${id}`;
     return this.http.get<Education>(url);
+  }
+
+  postProfile(profile: Profile): void {
+    this.http
+      .post<Profile>(this.urlProfiles, profile, this.httpOptions)
+      .subscribe();
+  }
+
+  postEducation(education: Education): Observable<Education> {
+    education.userId = this.profileId;
+    return this.http.post<Education>(
+      this.urlEducation,
+      education,
+      this.httpOptions
+    );
+  }
+
+  updateEducation(education: Education): Observable<any> {
+    education.userId = this.profileId;
+    education.id = this.educationId;
+    return this.http.put(this.urlEducation, education, this.httpOptions);
   }
 
   deleteEducation(education: Education): Observable<Education> {
