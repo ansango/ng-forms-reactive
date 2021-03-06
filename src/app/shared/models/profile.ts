@@ -12,7 +12,7 @@ export interface Profile {
   about?: string;
   companyName?: string;
   companyDescription?: string;
-  CIF?: string;
+  cif?: string;
 }
 
 export enum ProfileNationality {

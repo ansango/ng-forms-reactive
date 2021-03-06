@@ -110,6 +110,9 @@ export class InMemoryDataService implements InMemoryDbService {
         nationality: ProfileNationality.ES,
         nif: '70873352W',
         about: 'Soy Anibal Santos, un empresario',
+        companyName: 'Metropolis Coop',
+        companyDescription: 'Cooperativa de Vigo',
+        cif: 'A58818501',
       },
     ];
     const education: Education[] = [

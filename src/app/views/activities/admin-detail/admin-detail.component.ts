@@ -74,6 +74,7 @@ export class AdminDetailComponent implements OnInit {
   }
 
   onSubmit(form: FormGroup): void {
+    //TODO: MOVE TO -> ACTIVITY-SERVICE
     const activity: Activity = {
       ...form.value,
       id: this.activity?.id,

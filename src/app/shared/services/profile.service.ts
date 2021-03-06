@@ -60,6 +60,11 @@ export class ProfileService {
     );
   }
 
+  updateProfile(profile: Profile): Observable<any> {
+    profile.id = this.profileId;
+    return this.http.put(this.urlProfiles, profile, this.httpOptions);
+  }
+
   updateEducation(education: Education): Observable<any> {
     education.userId = this.profileId;
     education.id = this.educationId;
