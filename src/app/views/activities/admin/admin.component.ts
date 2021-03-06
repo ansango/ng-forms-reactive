@@ -13,8 +13,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class AdminComponent implements OnInit {
   activities!: Activity[];
   selectedActivity!: Activity;
-  displayActivity: boolean = false;
-  
+
   constructor(
     private activityService: ActivityService,
     private userService: UserService,
@@ -23,11 +22,6 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.getActivities();
-  }
-
-  onSelect(activity: Activity): void {
-    this.selectedActivity = activity;
-    this.displayActivity = true;
   }
 
   getActivities(): void {
@@ -39,16 +33,19 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  confirmModal(activity: Activity, idModal: string): void {
-    this.closeModal(idModal);
-    this.activities = this.activities.filter((act) => act !== activity);
-    this.activityService.deleteActivity(activity).subscribe(() => {
-      this.displayActivity = false;
-    });
+  onDelete(activity: Activity, idModal: string): void {
+    this.selectedActivity = activity;
+    this.openModal(idModal);
   }
 
   openModal(id: string): void {
     this.modalService.open(id);
+  }
+
+  confirmModal(activity: Activity, idModal: string): void {
+    this.closeModal(idModal);
+    this.activities = this.activities.filter((act) => act !== activity);
+    this.activityService.deleteActivity(activity).subscribe(() => {});
   }
 
   closeModal(id: string): void {

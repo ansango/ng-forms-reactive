@@ -1,38 +1,55 @@
-<ul class="activities">
-  <li
-    *ngFor="let activity of activities"
-    [class.selected]="activity === selectedActivity"
-  >
-    <a (click)="onSelect(activity)">
-      <span class="badge">{{ activity.id }}</span>
-      <span>{{ activity.name }}</span>
-      <span>{{ activity.price }}</span>
-    </a>
-  </li>
-</ul>
-
-<div *ngIf="selectedActivity && displayActivity">
-  <h2>{{ selectedActivity.name | uppercase }} Details</h2>
-  <div><span>id: </span>{{ selectedActivity.id }}</div>
-  <div>
-    {{ selectedActivity.name }}
-  </div>
-  <button routerLink="/activities/edit/{{ selectedActivity.id }}">
-    Edit Activity
-  </button>
-  <button (click)="openModal('delete-modal')">Delete Activity</button>
-
-  <app-modal id="delete-modal">
-    <div>
-      You're deleting
-      <div>
-        {{ selectedActivity.name }}
+<div class="wrapper-blocks">
+  <div class="wrapper-table">
+    <div class="main-container">
+      <div class="table-container">
+        <div class="table-row heading">
+          <div class="row-item">Name</div>
+          <div class="row-item">Category</div>
+          <div class="row-item">Price</div>
+          <div class="row-item">Language</div>
+          <div class="row-item">Date</div>
+          <div class="row-item">Actions</div>
+        </div>
+        <div
+          class="table-row"
+          *ngFor="let activity of activities"
+        >
+          <div class="row-item">{{ activity.name }}</div>
+          <div class="row-item">{{ activity.category }}</div>
+          <div class="row-item">{{ activity.price }}</div>
+          <div class="row-item">{{ activity.language }}</div>
+          <div class="row-item">
+            {{ activity.date | date: "dd/mm/yyyy" }}
+          </div>
+          <div class="row-item buttons">
+            <button routerLink="/activities/edit/{{ activity.id }}">
+              edit
+            </button>
+            <button (click)="onDelete(activity, 'delete-modal')">
+              delete
+            </button>
+          </div>
+        </div>
       </div>
-      are you sure?
     </div>
-    <button (click)="confirmModal(selectedActivity, 'delete-modal')">Ok</button>
-    <button (click)="closeModal('delete-modal')">Cancel</button>
-  </app-modal>
-</div>
 
-<button routerLink="/activities/new">Add Activity</button>
+    <button routerLink="/activities/new">Add Activity</button>
+  </div>
+  <div class="wrapper-detail">
+    <div *ngIf="selectedActivity">
+      <app-modal id="delete-modal">
+        <div>
+          You're deleting
+          <div>
+            {{ selectedActivity.name }}
+          </div>
+          are you sure?
+        </div>
+        <button (click)="confirmModal(selectedActivity, 'delete-modal')">
+          Ok
+        </button>
+        <button (click)="closeModal('delete-modal')">Cancel</button>
+      </app-modal>
+    </div>
+  </div>
+</div>
