@@ -1,20 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileRoutingModule } from './profile-routing.module';
+import { ModalModule } from 'src/app/shared/components/modal';
+import { ProfileTouristComponent } from './profile-tourist/profile-tourist.component';
+import { ProfileCompanyComponent } from './profile-company/profile-company.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EducationComponent } from './education/education.component';
-import { ModalModule } from 'src/app/shared/components/modal';
-import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 import { EducationNewEditComponent } from './education-new-edit/education-new-edit.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     ProfileComponent,
     EducationComponent,
-    ProfileEditComponent,
+    ProfileTouristComponent,
     EducationNewEditComponent,
+    ProfileCompanyComponent,
   ],
   imports: [
     CommonModule,

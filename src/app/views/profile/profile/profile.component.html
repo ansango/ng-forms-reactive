@@ -28,7 +28,7 @@
     <p>{{ profile?.about }}</p>
   </div>
 
-  <button routerLink="/profile/edit">Update Profile</button>
+  <button routerLink="/profile/edit/{{ profile?.type }}">Update Profile</button>
 </div>
 
 <app-education class="education" [profile]="profile"></app-education>

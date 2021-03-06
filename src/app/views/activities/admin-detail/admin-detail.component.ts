@@ -74,13 +74,11 @@ export class AdminDetailComponent implements OnInit {
   }
 
   onSubmit(form: FormGroup): void {
-    //TODO: MOVE TO -> ACTIVITY-SERVICE
-    const activity: Activity = {
-      ...form.value,
-      id: this.activity?.id,
-    };
     this.activityService
-      .updateActivity(activity)
+      .updateActivity({
+        ...form.value,
+        id: this.activity?.id,
+      })
       .subscribe(() => this.router.navigate(['/admin']));
   }
 }

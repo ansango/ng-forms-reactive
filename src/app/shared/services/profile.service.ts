@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Education } from '../models/education';
 import { Profile } from '../models/profile';
+import { UserType } from '../models/user';
 import { MessageService } from './message.service';
 
 @Injectable({
@@ -16,6 +17,7 @@ export class ProfileService {
   };
 
   profileId!: number;
+  profileType!: string;
   educationId!: number;
 
   private readonly urlEducation = 'api/education';
@@ -23,8 +25,8 @@ export class ProfileService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {}
 
   getProfile(id: number): Observable<Profile> {
@@ -61,6 +63,8 @@ export class ProfileService {
   }
 
   updateProfile(profile: Profile): Observable<any> {
+    if (profile.cif) profile.type = UserType.COMPANY;
+    profile.type = UserType.TOURIST;
     profile.id = this.profileId;
     return this.http.put(this.urlProfiles, profile, this.httpOptions);
   }

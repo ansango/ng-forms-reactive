@@ -68,12 +68,22 @@
             formControlName="birthday"
           />
         </div>
+        <div class="phone">
+          <label>phone</label>
+          <input
+            type="number"
+            name="phone"
+            formControlName="phone"
+            placeholder="Phone"
+          />
+        </div>
         <div class="natinality">
           <label>Nationality</label>
           <select
             aria-placeholder="Nationality"
             name="nationality"
             formControlName="nationality"
+            (change)="selectNat($event)"
           >
             <option disabled value="null">Select a nationality</option>
             <option *ngFor="let nationality of nationalities">
@@ -91,6 +101,35 @@
               nationality is required
             </div>
           </span>
+        </div>
+        <div class="nif">
+          <label>nif</label>
+          <input
+            type="text"
+            placeholder="NIF"
+            name="nif"
+            formControlName="nif"
+          />
+          <span
+            *ngIf="
+              profileForm.get('nif')?.errors &&
+              (profileForm.get('nif')!.dirty || profileForm.get('nif')!.touched)
+            "
+          >
+            <div *ngIf="profileForm.get('nif')?.errors?.required">
+              nif is required
+            </div>
+          </span>
+          <div *ngIf="profileForm.errors?.errorNIF">nif isn't ok</div>
+        </div>
+        <div class="about-me">
+          <label>about me</label>
+          <textarea
+            name="about"
+            cols="38"
+            rows="5"
+            formControlName="about"
+          ></textarea>
         </div>
       </div>
 
