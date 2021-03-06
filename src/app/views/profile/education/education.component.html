@@ -1,16 +1,35 @@
-<div *ngFor="let certificate of education">
-  {{ certificate.type }}
-  {{ certificate.level }}
-  {{ certificate.name }}
-  {{ certificate.finishDate }}
-  <div>
-    <button routerLink="/profile/edit-edu/{{ certificate.id }}">edit</button>
-    <button (click)="onDelete(certificate, 'delete-modal')">delete</button>
+<div class="wrapper-table">
+  <div class="main-container">
+    <div class="table-container">
+      <div class="table-row heading">
+        <div class="row-item">Type</div>
+        <div class="row-item">Level</div>
+        <div class="row-item">Name</div>
+        <div class="row-item">University</div>
+        <div class="row-item">Actions</div>
+      </div>
+      <div class="table-row" *ngFor="let certificate of education">
+        <div class="row-item">{{ certificate.type }}</div>
+        <div class="row-item">{{ certificate.level }}</div>
+        <div class="row-item">{{ certificate.name }}</div>
+        <div class="row-item">
+          {{ certificate.finishDate | date: "dd/mm/yyyy" }}
+        </div>
+        <div class="row-item buttons">
+          <button routerLink="/profile/edit-edu/{{ certificate.id }}">
+            edit
+          </button>
+          <button (click)="onDelete(certificate, 'delete-modal')">
+            delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrapper-button">
+    <button routerLink="/profile/new-edu">Add Education</button>
   </div>
 </div>
-
-<button routerLink="/profile/new-edu">Add Education</button>
-
 <app-modal id="delete-modal">
   <div>
     You're deleting
