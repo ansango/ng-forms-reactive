@@ -1,0 +1,59 @@
+<div class="wrapper-activity">
+  <div class="form-group wrapper-form">
+    <h2>Activity</h2>
+    <form
+      class="activity-form"
+      (ngSubmit)="onSubmit(newEducationForm)"
+      [formGroup]="newEducationForm"
+    >
+      <div class="activity-group">
+        <div class="type">
+          <label>type</label>
+          <select
+            name="type"
+            aria-placeholder="Type"
+            formControlName="type"
+            (change)="selectType($event)"
+          >
+            <option value="null" disabled>Select a type education</option>
+            <option *ngFor="let type of types">{{ type }}</option>
+          </select>
+          <span
+            *ngIf="
+              newEducationForm.get('type')?.errors &&
+              (newEducationForm.get('type')!.dirty ||
+                newEducationForm.get('type')!.touched)
+            "
+          >
+            <div *ngIf="newEducationForm.get('type')?.errors?.required">
+              name is required
+            </div>
+            <div *ngIf="newEducationForm.get('type')?.errors?.minlength">
+              name is too short
+            </div>
+            <div *ngIf="newEducationForm.get('type')?.errors?.maxlength">
+              name is too long
+            </div>
+          </span>
+        </div>
+        <div class="level">
+          <label *ngIf="selectedType !== ''">level</label>
+          <select *ngIf="selectedType === 'training'">
+            <option value="null" disabled>Select a type education</option>
+            <option *ngFor="let level of training">{{ level }}</option>
+          </select>
+          <select *ngIf="selectedType === 'university'">
+            <option value="null" disabled>Select a type education</option>
+            <option *ngFor="let level of university">{{ level }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="wrapper-button">
+        <button type="submit" [disabled]="!newEducationForm.valid">
+          Create
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

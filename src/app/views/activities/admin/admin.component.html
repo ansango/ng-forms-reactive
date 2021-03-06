@@ -1,0 +1,38 @@
+<ul class="activities">
+  <li
+    *ngFor="let activity of activities"
+    [class.selected]="activity === selectedActivity"
+  >
+    <a (click)="onSelect(activity)">
+      <span class="badge">{{ activity.id }}</span>
+      <span>{{ activity.name }}</span>
+      <span>{{ activity.price }}</span>
+    </a>
+  </li>
+</ul>
+
+<div *ngIf="selectedActivity && displayActivity">
+  <h2>{{ selectedActivity.name | uppercase }} Details</h2>
+  <div><span>id: </span>{{ selectedActivity.id }}</div>
+  <div>
+    {{ selectedActivity.name }}
+  </div>
+  <button routerLink="/activities/edit/{{ selectedActivity.id }}">
+    Edit Activity
+  </button>
+  <button (click)="openModal('delete-modal')">Delete Activity</button>
+
+  <app-modal id="delete-modal">
+    <div>
+      You're deleting
+      <div>
+        {{ selectedActivity.name }}
+      </div>
+      are you sure?
+    </div>
+    <button (click)="confirmModal(selectedActivity, 'delete-modal')">Ok</button>
+    <button (click)="closeModal('delete-modal')">Cancel</button>
+  </app-modal>
+</div>
+
+<button routerLink="/activities/new">Add Activity</button>

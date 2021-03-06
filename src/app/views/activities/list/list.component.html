@@ -1,0 +1,14 @@
+<ul class="activities">
+  <li
+    *ngFor="let activity of activities"
+    [class.selected]="activity === selectedActivity"
+  >
+    <a (click)="onSelect(activity)">
+      <span class="badge">{{ activity.id }}</span>
+      <span>{{ activity.name }}</span>
+      <span>{{ activity.price }}</span>
+    </a>
+  </li>
+</ul>
+
+<app-detail [activity]="selectedActivity"></app-detail>

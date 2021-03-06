@@ -1,0 +1,26 @@
+<div *ngFor="let certificate of education">
+  {{ certificate.type }}
+  {{ certificate.level }}
+  {{ certificate.name }}
+  {{ certificate.finishDate }}
+  <div>
+    <button routerLink="/profile/edit-edu/{{ certificate.id }}">edit</button>
+    <button (click)="onDelete(certificate, 'delete-modal')">delete</button>
+  </div>
+</div>
+
+<button routerLink="/profile/new-edu">Add Education</button>
+
+<app-modal id="delete-modal">
+  <div>
+    You're deleting
+    <div>
+      {{ selectedCertification?.name }}
+    </div>
+    are you sure?
+  </div>
+  <button (click)="confirmModal(selectedCertification, 'delete-modal')">
+    Ok
+  </button>
+  <button (click)="closeModal('delete-modal')">Cancel</button>
+</app-modal>
