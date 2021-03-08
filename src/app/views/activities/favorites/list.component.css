@@ -1,3 +1,4 @@
+
 .wrapper-blocks {
   display: flex;
   margin: 250px 0;
@@ -89,35 +90,4 @@
 .table-row:last-child,
 .row-sub-container .row-item:last-child {
   border-bottom: 0;
-}
-
-p {
-  margin: 0;
-}
-
-.wrapper-container {
-  margin: 0 20px;
-}
-
-.container {
-  display: flex;
-}
-
-.container span {
-  width: 30%;
-  font-weight: bold;
-  text-transform: capitalize;
-}
-
-.container p {
-  width: 70%;
-}
-
-.wrapper-buttons {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.wrapper-buttons button {
-  margin: 0 5px;
 }

@@ -9,10 +9,15 @@ import { ActivityService } from 'src/app/shared/services/activity.service';
 })
 export class FavoritesComponent implements OnInit {
   favorites?: Activity[];
+  selectedActivity?: Activity;
   constructor(private activityService: ActivityService) {}
 
   ngOnInit(): void {
     this.getFavorites();
+  }
+
+  onSelect(activity: Activity): void {
+    this.selectedActivity = activity;
   }
 
   getFavorites() {
@@ -21,6 +26,7 @@ export class FavoritesComponent implements OnInit {
 
   removeFavorite(favorite: Activity) {
     this.activityService.removeFavorite(favorite);
+    this.selectedActivity = undefined;
     this.getFavorites();
   }
 }

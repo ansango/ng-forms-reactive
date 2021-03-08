@@ -18,6 +18,10 @@ export class DetailComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  get isLoggedIn(): boolean {
+    return this.userService.isUserLogged();
+  }
+
   get isTourist(): boolean {
     return this.userService.isUserTourist();
   }

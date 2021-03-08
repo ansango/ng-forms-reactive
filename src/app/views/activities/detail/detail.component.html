@@ -37,12 +37,15 @@
     </div>
     <div class="wrapper-buttons">
       <button
-        *ngIf="isTourist && !activity?.signedUp"
+        *ngIf="isLoggedIn && isTourist && !activity?.signedUp"
         (click)="subscription(activity)"
         class="sign"
       >
         Signup</button
-      ><button *ngIf="isTourist && !isFavorite" (click)="addFavorites(activity)">
+      ><button
+        *ngIf="isLoggedIn && isTourist && !isFavorite"
+        (click)="addFavorites(activity)"
+      >
         Favorites
       </button>
     </div>

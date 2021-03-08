@@ -76,7 +76,7 @@ export class UserService {
   logout(): void {
     localStorage.clear();
     this.loggedUser = false;
-    this.router.navigate(['/']);
+    this.router.navigate(['']);
   }
 
   getLocaleUser(): User {
