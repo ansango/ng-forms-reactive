@@ -10,10 +10,7 @@
           <div class="row-item">Date</div>
           <div class="row-item">Actions</div>
         </div>
-        <div
-          class="table-row"
-          *ngFor="let activity of activities"
-        >
+        <div class="table-row" *ngFor="let activity of activities">
           <div class="row-item">{{ activity.name }}</div>
           <div class="row-item">{{ activity.category }}</div>
           <div class="row-item">{{ activity.price }}</div>
@@ -25,31 +22,26 @@
             <button routerLink="/activities/edit/{{ activity.id }}">
               edit
             </button>
-            <button (click)="onDelete(activity, 'delete-modal')">
-              delete
-            </button>
+            <button (click)="onDelete(activity, 'delete-modal')">delete</button>
           </div>
         </div>
       </div>
     </div>
-
-    <button routerLink="/activities/new">Add Activity</button>
-  </div>
-  <div class="wrapper-detail">
-    <div *ngIf="selectedActivity">
-      <app-modal id="delete-modal">
-        <div>
-          You're deleting
-          <div>
-            {{ selectedActivity.name }}
-          </div>
-          are you sure?
-        </div>
-        <button (click)="confirmModal(selectedActivity, 'delete-modal')">
-          Ok
-        </button>
-        <button (click)="closeModal('delete-modal')">Cancel</button>
-      </app-modal>
+    <div class="wrapper-buttons">
+      <button routerLink="/activities/new">Add Activity</button>
     </div>
   </div>
+
+  <app-modal id="delete-modal">
+    <div class="modal-container">
+      <p>You're deleting {{ selectedActivity?.name }}</p>
+      <p>are you sure?</p>
+    </div>
+    <div class="wrapper-buttons">
+      <button (click)="confirmModal(selectedActivity, 'delete-modal')">
+        Ok
+      </button>
+      <button (click)="closeModal('delete-modal')">Cancel</button>
+    </div>
+  </app-modal>
 </div>

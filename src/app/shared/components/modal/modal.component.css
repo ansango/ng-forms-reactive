@@ -9,11 +9,18 @@ app-modal .modal {
   left: 0;
   z-index: 1000;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 app-modal .modal .modal-body {
+  max-width: 320px;
+  width: 100%;
   padding: 20px;
   background: #fff;
-  margin: 40px;
+  border-radius: 10px;
+  
 }
 app-modal .modal-background {
   position: fixed;

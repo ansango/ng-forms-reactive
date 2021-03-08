@@ -82,3 +82,20 @@
 .row-sub-container .row-item:last-child {
   border-bottom: 0;
 }
+
+#delete-modal .modal-container {
+  padding: 50px 0;
+}
+
+#delete-modal .modal-container {
+  text-align: center;
+}
+
+#delete-modal .wrapper-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#delete-modal .wrapper-buttons button {
+  margin: 0 5px;
+}

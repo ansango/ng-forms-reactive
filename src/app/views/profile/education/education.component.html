@@ -30,16 +30,16 @@
     <button routerLink="/profile/new-edu">Add Education</button>
   </div>
 </div>
+
 <app-modal id="delete-modal">
-  <div>
-    You're deleting
-    <div>
-      {{ selectedCertification?.name }}
-    </div>
-    are you sure?
+  <div class="modal-container">
+    <p>You're deleting {{ selectedCertification?.name }}</p>
+    <p>are you sure?</p>
   </div>
-  <button (click)="confirmModal(selectedCertification, 'delete-modal')">
-    Ok
-  </button>
-  <button (click)="closeModal('delete-modal')">Cancel</button>
+  <div class="wrapper-buttons">
+    <button (click)="confirmModal(selectedCertification, 'delete-modal')">
+      Ok
+    </button>
+    <button (click)="closeModal('delete-modal')">Cancel</button>
+  </div>
 </app-modal>

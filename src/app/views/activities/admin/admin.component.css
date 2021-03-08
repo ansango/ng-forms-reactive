@@ -4,7 +4,7 @@
 }
 
 .wrapper-blocks > * {
-  width: 50%;
+  width: 100%;
 }
 
 .wrapper-table {
@@ -113,11 +113,26 @@ p {
   width: 70%;
 }
 
-.wrapper-buttons {
+.wrapper-table .wrapper-buttons {
   display: flex;
   justify-content: flex-end;
+  max-width: 1125px;
+  margin: 25px 0;
 }
 
 .wrapper-buttons button {
   margin: 0 5px;
+}
+
+#delete-modal .modal-container {
+  padding: 50px 0;
+}
+
+#delete-modal .modal-container {
+  text-align: center;
+}
+
+#delete-modal .wrapper-buttons {
+  display: flex;
+  justify-content: flex-end;
 }
