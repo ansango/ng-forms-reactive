@@ -74,6 +74,11 @@ export class InMemoryDataService implements InMemoryDbService {
         activityId: 2,
         userId: 2,
       },
+      {
+        id: 3,
+        activityId: 2,
+        userId: 1,
+      },
     ];
     const users: User[] = [
       {

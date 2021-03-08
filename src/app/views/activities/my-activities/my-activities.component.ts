@@ -11,7 +11,9 @@ import { ActivityService } from 'src/app/shared/services/activity.service';
 export class MyActivitiesComponent implements OnInit {
   activities!: (Activity & { signedUp?: boolean })[];
   myActivities!: MyActivity[];
-  selectedActivity!: Activity & { signedUp?: boolean };
+  selectedActivity!: (Activity & { signedUp?: boolean }) | undefined;
+
+  activitiesParsed!: Activity[];
 
   constructor(private activityService: ActivityService) {}
 
@@ -50,10 +52,17 @@ export class MyActivitiesComponent implements OnInit {
       return a.activityId === activity.id;
     });
 
-    this.myActivities = this.myActivities.filter(
-      (a) => a.activityId !== activity.id
-    );
+    //TODO: no se actualiza al borrar el ultimo
+    this.activities = this.activities.filter((a) => {
+      return a.id !== _activity[0].id;
+    });
 
-    this.activityService.cancelSubscription(_activity[0]).subscribe();
+    this.myActivities = this.myActivities.filter((a) => {
+      a.activityId !== activity.id;
+    });
+
+    this.activityService
+      .cancelSubscription(_activity[0])
+      .subscribe(() => (this.selectedActivity = undefined));
   }
 }

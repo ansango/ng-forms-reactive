@@ -33,7 +33,7 @@ export class ActivityService {
     return this.http.get<Activity>(url);
   }
 
-  getMyActivities() {
+  getMyActivities(): Observable<MyActivity[]> {
     const currentUser = this.userService.getLocaleUser();
     return this.http.get<MyActivity[]>(this.myActivitiesUrl).pipe(
       mergeAll(),
