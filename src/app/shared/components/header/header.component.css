@@ -22,6 +22,13 @@
 .header a.logo {
   font-size: 25px;
   font-weight: bold;
+  background-image: url("../../../../assets/1FAA2.svg");
+  background-repeat: no-repeat;
+}
+
+.header .logo p {
+  margin: 0;
+  padding-left: 40px;
 }
 
 .header a:hover {
@@ -34,12 +41,10 @@
   color: white;
 }
 
-/* Float the link section to the right */
 .header-right {
   float: right;
 }
 
-/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
 @media screen and (max-width: 500px) {
   .header a {
     float: none;
