@@ -42,7 +42,9 @@
         class="sign"
       >
         Signup</button
-      ><button *ngIf="isTourist" class="favorites">Favorites</button>
+      ><button *ngIf="isTourist && !isFavorite" (click)="addFavorites(activity)">
+        Favorites
+      </button>
     </div>
   </div>
 </div>

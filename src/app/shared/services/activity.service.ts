@@ -42,6 +42,18 @@ export class ActivityService {
     );
   }
 
+  getFavorites(): Activity[] {
+    return JSON.parse(localStorage.getItem('favorites')!) || [];
+  }
+
+  isFavorite(id: number) {
+    const favorite = this.getFavorites().filter((fav) => {
+      return fav.id === id;
+    });
+    if (favorite[0]) return true;
+    return false;
+  }
+
   postActivity(activity: Activity): Observable<Activity> {
     if (
       !this.userService.isUserLogged() ||
@@ -85,5 +97,18 @@ export class ActivityService {
     const id = activity.id;
     const url = `${this.myActivitiesUrl}/${id}`;
     return this.http.delete<MyActivity>(url, this.httpOptions);
+  }
+
+  addFavorites(activity: Activity) {
+    const activities = this.getFavorites();
+    activities.push(activity);
+    localStorage.setItem('favorites', JSON.stringify(activities));
+  }
+
+  removeFavorite(activity: Activity) {
+    const activities = this.getFavorites().filter((fav) => {
+      return activity.id !== fav.id;
+    });
+    localStorage.setItem('favorites', JSON.stringify(activities));
   }
 }

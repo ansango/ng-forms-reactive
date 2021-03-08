@@ -11,10 +11,10 @@ import { ActivityService } from 'src/app/shared/services/activity.service';
 export class ListComponent implements OnInit {
   activities!: (Activity & { signedUp?: boolean })[];
   selectedActivity!: Activity & { signedUp?: boolean };
-
+  isFavorite?: boolean;
   constructor(private activityService: ActivityService) {}
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.getActivities();
     this.getMyActivities();
   }
