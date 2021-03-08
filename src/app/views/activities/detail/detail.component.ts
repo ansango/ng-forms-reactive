@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Activity } from 'src/app/shared/models/activity';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Activity, MyActivity } from 'src/app/shared/models/activity';
 import { ActivityService } from 'src/app/shared/services/activity.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-detail',
@@ -8,8 +9,25 @@ import { ActivityService } from 'src/app/shared/services/activity.service';
   styleUrls: ['./detail.component.css'],
 })
 export class DetailComponent implements OnInit {
-  @Input() activity!: Activity;
-  constructor(private activityService: ActivityService) {}
+  @Input() activity?: Activity & { signedUp?: boolean };
+  constructor(
+    private userService: UserService,
+    private activityService: ActivityService
+  ) {}
 
   ngOnInit(): void {}
+
+  get isTourist(): boolean {
+    return this.userService.isUserTourist();
+  }
+
+  subscription(activity: Activity) {
+    this.activityService.subscribeActivity(activity).subscribe(
+      () => (
+        (this.activity!.signedUp = true),
+        // TODO: ESTO PETA CUANDO HACES LOGOUT
+        (this.activity!.peopleRegistered += 1)
+      )
+    );
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { mergeAll } from 'rxjs/operators';
 import { Activity } from 'src/app/shared/models/activity';
 import { ActivityService } from 'src/app/shared/services/activity.service';
 
@@ -8,22 +9,35 @@ import { ActivityService } from 'src/app/shared/services/activity.service';
   styleUrls: ['./list.component.css'],
 })
 export class ListComponent implements OnInit {
-  activities!: Activity[];
-  selectedActivity!: Activity;
-  
+  activities!: (Activity & { signedUp?: boolean })[];
+  selectedActivity!: Activity & { signedUp?: boolean };
+
   constructor(private activityService: ActivityService) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.getActivities();
+    this.getMyActivities();
   }
 
   onSelect(activity: Activity): void {
     this.selectedActivity = activity;
   }
-  
+
   getActivities(): void {
     this.activityService
       .getActivities()
       .subscribe((activities) => (this.activities = activities));
+  }
+
+  getMyActivities(): void {
+    this.activityService
+      .getMyActivities()
+      .pipe(mergeAll())
+      .subscribe((activity) => {
+        const act = this.activities?.find((ac) => ac.id == activity.activityId);
+        if (act) {
+          act.signedUp = true;
+        }
+      });
   }
 }

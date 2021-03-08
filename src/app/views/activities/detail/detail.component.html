@@ -36,8 +36,13 @@
       </div>
     </div>
     <div class="wrapper-buttons">
-      <button class="sign">Signup</button
-      ><button class="favorites">Favorites</button>
+      <button
+        *ngIf="isTourist && !activity?.signedUp"
+        (click)="subscription(activity)"
+        class="sign"
+      >
+        Signup</button
+      ><button *ngIf="isTourist" class="favorites">Favorites</button>
     </div>
   </div>
 </div>

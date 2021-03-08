@@ -14,6 +14,12 @@ export interface Activity {
   adminId: number;
 }
 
+export interface MyActivity {
+  id?: number;
+  activityId: number;
+  userId: number;
+}
+
 export enum ActivityCategory {
   CULTURE = 'culture and heritage',
   WINE = 'wine tourism',

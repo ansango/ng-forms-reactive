@@ -6,6 +6,7 @@ import {
   ActivityLanguage,
   ActivitySubcategoryBeach,
   ActivitySubcategoryWine,
+  MyActivity,
 } from '../models/activity';
 import {
   Education,
@@ -62,7 +63,7 @@ export class InMemoryDataService implements InMemoryDbService {
         adminId: 3,
       },
     ];
-    const myActivities: { id: number; activityId: number; userId: number }[] = [
+    const myActivities: MyActivity[] = [
       {
         id: 1,
         activityId: 1,
