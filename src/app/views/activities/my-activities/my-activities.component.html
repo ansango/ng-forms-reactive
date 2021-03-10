@@ -22,7 +22,7 @@
             <div class="row-item">{{ activity.price }}</div>
             <div class="row-item">{{ activity.language }}</div>
             <div class="row-item">
-              {{ activity.date | date: "dd/mm/yyyy" }}
+              {{ activity.date | date: "dd/MM/yyyy" }}
             </div>
             <div class="row-item buttons">
               <button (click)="onSelect(activity)">Show</button>
@@ -51,7 +51,7 @@
         </div>
         <div class="container">
           <span>date: </span>
-          <p>{{ selectedActivity.date | date: "dd/mm/yyyy" }}</p>
+          <p>{{ selectedActivity.date | date: "dd/MM/yyyy" }}</p>
         </div>
         <div class="container">
           <span>people registered: </span>

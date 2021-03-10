@@ -10,7 +10,12 @@
       <div class="education-group">
         <div class="type">
           <label>type</label>
-          <select name="type" aria-placeholder="Type" formControlName="type">
+          <select
+            name="type"
+            aria-placeholder="Type"
+            formControlName="type"
+            (change)="newEducationForm.patchValue({ level: null })"
+          >
             <option value="null" disabled>Select a type education</option>
             <option *ngFor="let type of types">{{ type }}</option>
           </select>
@@ -39,7 +44,9 @@
             "
           >
             <option value="null" disabled>Select a type education</option>
-            <option *ngFor="let level of training">{{ level }}</option>
+            <option *ngFor="let level of training" [value]="level">
+              {{ level }}
+            </option>
           </select>
           <select
             aria-placeholder="level"
@@ -50,7 +57,9 @@
             "
           >
             <option value="null" disabled>Select a type education</option>
-            <option *ngFor="let level of university">{{ level }}</option>
+            <option *ngFor="let level of university" [value]="level">
+              {{ level }}
+            </option>
           </select>
           <span
             *ngIf="
@@ -132,7 +141,8 @@
 
       <div class="wrapper-button">
         <button type="submit" [disabled]="!newEducationForm.valid">
-          Create
+          <span *ngIf="!isEducation"> Create </span>
+          <span *ngIf="isEducation"> Update </span>
         </button>
       </div>
     </form>

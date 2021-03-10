@@ -39,9 +39,12 @@
             aria-placeholder="Category"
             name="category"
             formControlName="category"
+            (change)="editActivityForm.patchValue({ subcategory: null })"
           >
             <option disabled value="null">Select a category</option>
-            <option *ngFor="let category of categories">{{ category }}</option>
+            <option *ngFor="let category of categories" [value]="category">
+              {{ category }}
+            </option>
           </select>
           <span
             *ngIf="
@@ -70,7 +73,10 @@
             "
           >
             <option disabled value="null">Select a subcategory</option>
-            <option *ngFor="let subcategory of subCulture">
+            <option
+              *ngFor="let subcategory of subCulture"
+              [value]="subcategory"
+            >
               {{ subcategory }}
             </option>
           </select>
@@ -83,7 +89,7 @@
             "
           >
             <option disabled value="null">Select a subcategory</option>
-            <option *ngFor="let subcategory of subWine">
+            <option *ngFor="let subcategory of subWine" [value]="subcategory">
               {{ subcategory }}
             </option>
           </select>
@@ -96,7 +102,7 @@
             "
           >
             <option disabled value="null">Select a subcategory</option>
-            <option *ngFor="let subcategory of subBeach">
+            <option *ngFor="let subcategory of subBeach" [value]="subcategory">
               {{ subcategory }}
             </option>
           </select>

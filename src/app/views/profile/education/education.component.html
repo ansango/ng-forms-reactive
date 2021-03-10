@@ -15,7 +15,7 @@
         <div class="row-item">{{ certificate.name }}</div>
         <div class="row-item">{{ certificate.school }}</div>
         <div class="row-item">
-          {{ certificate.finishDate | date: "dd/mm/yyyy" }}
+          {{ certificate.finishDate | date: "dd/MM/yyyy" }}
         </div>
         <div class="row-item buttons">
           <button routerLink="/profile/edit-edu/{{ certificate.id }}">
