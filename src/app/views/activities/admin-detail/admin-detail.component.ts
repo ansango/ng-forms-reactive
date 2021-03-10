@@ -23,9 +23,8 @@ export class AdminDetailComponent implements OnInit {
   subCulture = Object.values(ActivitySubcategoryCulture);
   subWine = Object.values(ActivitySubcategoryWine);
   subBeach = Object.values(ActivitySubcategoryBeach);
-  selectedCat: string = '';
   languages = Object.values(ActivityLanguage);
-
+  ActivityCategory = ActivityCategory;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -51,10 +50,6 @@ export class AdminDetailComponent implements OnInit {
       price: [0, [Validators.required, Validators.min(0)]],
     });
     this.getActivity();
-  }
-
-  selectedCategory(event: any): string {
-    return (this.selectedCat = event.target.value.match('[a-zA-Z]+')[0]);
   }
 
   getActivity(): void {

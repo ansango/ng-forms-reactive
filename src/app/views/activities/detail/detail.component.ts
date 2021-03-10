@@ -31,13 +31,9 @@ export class DetailComponent implements OnInit {
   }
 
   subscription(activity: Activity) {
-    this.activityService.subscribeActivity(activity).subscribe(
-      () => (
-        (this.activity!.signedUp = true),
-        // TODO: ESTO PETA CUANDO HACES LOGOUT
-        (this.activity!.peopleRegistered += 1)
-      )
-    );
+    this.activityService
+      .subscribeActivity(activity)
+      .subscribe(() => (this.activity!.signedUp = true));
   }
 
   addFavorites(activity: Activity) {

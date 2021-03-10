@@ -52,17 +52,14 @@ export class MyActivitiesComponent implements OnInit {
       return a.activityId === activity.id;
     });
 
-    //TODO: no se actualiza al borrar el ultimo
     this.activities = this.activities.filter((a) => {
-      return a.id !== _activity[0].id;
+      return a.id !== _activity[0].activityId;
     });
 
     this.myActivities = this.myActivities.filter((a) => {
-      a.activityId !== activity.id;
+      return a.activityId !== activity.id;
     });
-
-    this.activityService
-      .cancelSubscription(_activity[0])
-      .subscribe(() => (this.selectedActivity = undefined));
+    this.selectedActivity = undefined;
+    this.activityService.cancelSubscription(_activity[0], activity).subscribe();
   }
 }

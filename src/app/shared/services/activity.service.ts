@@ -70,10 +70,8 @@ export class ActivityService {
   }
 
   updateActivity(activity: Activity): Observable<any> {
-    activity.adminId =
-      typeof activity.adminId === null || undefined
-        ? this.userService.getLocaleUser().id!
-        : activity.adminId;
+    const adminId = this.userService.getLocaleUser().id!;
+    activity.adminId = adminId;
     return this.http.put(this.urlActivities, activity, this.httpOptions);
   }
 
@@ -83,19 +81,29 @@ export class ActivityService {
     return this.http.delete<Activity>(url, this.httpOptions);
   }
 
-  subscribeActivity(activity: Activity) {
+  subscribeActivity(activity: Activity): Observable<MyActivity> {
     const currentUser = this.userService.getLocaleUser();
     const myActivity: MyActivity = {
       activityId: activity.id,
       userId: currentUser.id!,
     };
-    this.updateActivity(activity);
-    return this.http.post(this.myActivitiesUrl, myActivity, this.httpOptions);
+    activity.peopleRegistered += 1;
+    this.updateActivity(activity).subscribe();
+    return this.http.post<MyActivity>(
+      this.myActivitiesUrl,
+      myActivity,
+      this.httpOptions
+    );
   }
 
-  cancelSubscription(activity: MyActivity): Observable<MyActivity> {
-    const id = activity.id;
+  cancelSubscription(
+    myActivity: MyActivity,
+    activity: Activity
+  ): Observable<MyActivity> {
+    const id = myActivity.id;
     const url = `${this.myActivitiesUrl}/${id}`;
+    activity.peopleRegistered -= 1;
+    this.updateActivity(activity).subscribe();
     return this.http.delete<MyActivity>(url, this.httpOptions);
   }
 

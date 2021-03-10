@@ -39,7 +39,6 @@
             aria-placeholder="Category"
             name="category"
             formControlName="category"
-            (change)="selectedCategory($event)"
           >
             <option disabled value="null">Select a category</option>
             <option *ngFor="let category of categories">{{ category }}</option>
@@ -58,12 +57,17 @@
         </div>
 
         <div class="subcategory">
-          <label *ngIf="selectedCat !== ''">subcategory</label>
+          <label *ngIf="editActivityForm.get('category')?.value !== ''"
+            >subcategory</label
+          >
           <select
             aria-placeholder="Subcategory"
             name="subcategory"
             formControlName="subcategory"
-            *ngIf="selectedCat === 'culture'"
+            *ngIf="
+              editActivityForm.get('category')?.value ===
+              ActivityCategory.CULTURE
+            "
           >
             <option disabled value="null">Select a subcategory</option>
             <option *ngFor="let subcategory of subCulture">
@@ -74,7 +78,9 @@
             aria-placeholder="Subcategory"
             name="subcategory"
             formControlName="subcategory"
-            *ngIf="selectedCat === 'wine'"
+            *ngIf="
+              editActivityForm.get('category')?.value === ActivityCategory.WINE
+            "
           >
             <option disabled value="null">Select a subcategory</option>
             <option *ngFor="let subcategory of subWine">
@@ -85,7 +91,9 @@
             aria-placeholder="Subcategory"
             name="subcategory"
             formControlName="subcategory"
-            *ngIf="selectedCat === 'beach'"
+            *ngIf="
+              editActivityForm.get('category')?.value === ActivityCategory.BEACH
+            "
           >
             <option disabled value="null">Select a subcategory</option>
             <option *ngFor="let subcategory of subBeach">
@@ -142,12 +150,7 @@
       <div class="date">
         <label>date</label>
 
-        <input
-          type="date"
-          placeholder=""
-          name="date"
-          formControlName="date"
-        />
+        <input type="date" placeholder="" name="date" formControlName="date" />
       </div>
 
       <div class="price">

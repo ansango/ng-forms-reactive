@@ -45,7 +45,7 @@ export class AdminComponent implements OnInit {
   confirmModal(activity: Activity, idModal: string): void {
     this.closeModal(idModal);
     this.activities = this.activities.filter((act) => act !== activity);
-    this.activityService.deleteActivity(activity).subscribe(() => {});
+    this.activityService.deleteActivity(activity).subscribe();
   }
 
   closeModal(id: string): void {

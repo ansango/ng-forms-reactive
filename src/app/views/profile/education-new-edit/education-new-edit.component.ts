@@ -23,7 +23,7 @@ export class EducationNewEditComponent implements OnInit {
   types = Object.values(EducationType);
   university = Object.values(EducationUniversity);
   training = Object.values(EducationTraining);
-  selectedType: string = '';
+  EducationType = EducationType;
 
   constructor(
     private route: ActivatedRoute,
@@ -57,12 +57,6 @@ export class EducationNewEditComponent implements OnInit {
     this.getEducation();
   }
 
-  selectType(event: any) {
-    if (event.target.value.includes(EducationType.TRAINING))
-      return (this.selectedType = 'training');
-    return (this.selectedType = 'university');
-  }
-
   getEducation(): void | boolean {
     const id = +this.route.snapshot.paramMap.get('id')!;
     if (id) this.isEducation = true;
@@ -73,8 +67,10 @@ export class EducationNewEditComponent implements OnInit {
         level: education.level,
         name: education.name,
         school: education.school,
-        finisDate: education.finishDate,
+        finishDate: education.finishDate,
       });
+
+      console.log(education);
     });
   }
 

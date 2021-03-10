@@ -12,7 +12,7 @@ Hecho:
 
 Falta:
 
-1. revisar signup en actividad al cancelar peta
-2. people registered no se actualiza
+1. revisar signup en actividad al cancelar peta -
+2. people registered no se actualiza -
 3. fechas en formulario, como se mandan correctamente?
 4. campos condicionales en formularios, al hacer update no se visualiza lo que viene de back y es condicional
